@@ -19,8 +19,6 @@ namespace HotelSystemUseERD.Services
 
         public void AddBooking(Booking booking)
         {
-            var allBookings = _bookingRepository.GetAllBookings();
-
             _bookingRepository.AddBooking(booking);
         }
 

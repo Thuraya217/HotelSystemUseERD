@@ -6,7 +6,7 @@ namespace HotelSystemUseERD.Services
     {
         void AddGuest(Guest guest);
         void DeleteGuest(string guestId);
-        List<Guest> GetAllGuests();
+        List <Guest> GetAllGuests();
         Guest GetGuestById(string guestId);
         void UpdateGuest(Guest guest);
     }

@@ -30,17 +30,21 @@ namespace HotelSystemUseERD.Repositories
 
         public void DeleteGuest(string guestId)
         {
-            var guest = _context.Guests.FirstOrDefault(g => g.GuestId == guestId);
+            var guest = _context.Guests.Find(guestId);
             if (guest != null)
             {
                 _context.Guests.Remove(guest);
                 _context.SaveChanges();
             }
+            else
+            {
+                Console.WriteLine($"Guest with ID {guestId} not found.");
+            }
         }
 
         public Guest GetGuestById(string guestId)
         {
-            return _context.Guests.FirstOrDefault(g => g.GuestId == guestId);
+            return _context.Guests.Find(guestId);
         }
 
         public List<Guest> GetAllGuests()

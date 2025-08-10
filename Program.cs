@@ -42,11 +42,11 @@ namespace HotelSystemUseERD
                     switch (choice)
                     {
                         case "1":
-                            AdminMenu(guestService, roomService, bookingService, reviewService);
+                            AdminMenu(roomService, bookingService);
                             break;
 
                         case "2":
-                            UserMenu(guestService, roomService, bookingService, reviewService);
+                            UserMenu(guestService, roomService, bookingService);
                             break;
 
                         case "0":
@@ -61,12 +61,13 @@ namespace HotelSystemUseERD
                     }
                 }
 
-                static void AdminMenu(GuestService guestService, RoomService roomService, BookingService bookingService, ReviewService reviewService)
+                static void AdminMenu(IRoomService roomService, IBookingService bookingService)
                 {
 
                     if (!AdminLogin())
                     {
                         Console.WriteLine("Invalid admin name or password. Returning to main menu...");
+                        Console.ReadKey();
                         return;
                     }
 
@@ -77,9 +78,7 @@ namespace HotelSystemUseERD
                         Console.WriteLine("=== Admin Menu ===");
                         Console.WriteLine("1. Add Room");
                         Console.WriteLine("2. View All Rooms");
-                        Console.WriteLine("3. View All Bookings");
-                        Console.WriteLine("4. Delete Room");
-                        Console.WriteLine("5. Delete Booking");
+                        Console.WriteLine("3. Delete Room");
                         Console.WriteLine("0. Back to Main Menu");
                         Console.Write("Choose option: ");
 
@@ -87,23 +86,15 @@ namespace HotelSystemUseERD
                         switch (adminChoice)
                         {
                             case "1":
-                               //AddRoom(roomService);
+                               AddRoom(roomService);
                                 break;
 
                             case "2":
-                              //ViewRooms(roomService);
+                              ViewRooms(roomService);
                                 break;
 
                             case "3":
-                             // ViewBookings(bookingService);
-                                break;
-
-                            case "4":
-                             // DeleteRoom(roomService);
-                                break;
-
-                            case "5":
-                             // DeleteBooking(bookingService);
+                              DeleteRoom(roomService);
                                 break;
 
                             case "0":
@@ -118,7 +109,7 @@ namespace HotelSystemUseERD
                     }
                 }
 
-                static void UserMenu(GuestService guestService, RoomService roomService, BookingService bookingService, ReviewService reviewService)
+                static void UserMenu(IGuestService guestService, IRoomService roomService, IBookingService bookingService)
                 {
                     Console.Clear();
                     Console.WriteLine("=== User Registration ===");
@@ -131,6 +122,7 @@ namespace HotelSystemUseERD
                         Console.WriteLine("Guest not found, creating new guest.");
                         Console.Write("Enter your Name: ");
                         string guestName = Console.ReadLine();
+
                         Console.Write("Enter your Phone Number: ");
                         string phone = Console.ReadLine();
 
@@ -140,6 +132,7 @@ namespace HotelSystemUseERD
                             GuestName = guestName,
                             PhoneNumber = phone
                         };
+
                         guestService.AddGuest(guest);
                         Console.WriteLine($"Guest created successfully. name: {guest.GuestName}, ID: {guest.GuestId}!");
                     }
@@ -165,15 +158,15 @@ namespace HotelSystemUseERD
                         switch (userChoice)
                         {
                             case "1":
-                            // BookRoom(guest, roomService, bookingService);
+                            BookRoom(guest, roomService, bookingService);
                                 break;
 
                             case "2":
-                            // ViewGuestBookings(guest.GuestId, bookingService);
+                            ViewGuestBookings(guest.GuestId, bookingService);
                                 break;
 
                             case "3":
-                            // CancelBooking(guest.GuestId, bookingService);
+                             CancelBooking(guest.GuestId, bookingService);
                                 break;
 
                             case "0":
@@ -212,7 +205,7 @@ namespace HotelSystemUseERD
                 }
                 else
                 {
-                    Console.WriteLine("Invalid credentials.");
+                    Console.WriteLine("Invalid user name or password.");
                     Console.WriteLine("Press any key to return to main menu...");
                     Console.ReadKey();
                     return false;

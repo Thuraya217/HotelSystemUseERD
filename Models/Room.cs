@@ -10,9 +10,14 @@ namespace HotelSystemUseERD.Models
 {
     public class Room
     {
+        [Key]
         public string RoomId { get; set; }
         public string RoomType { get; set; }
         public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
+
+        // Navigation properties
+        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }

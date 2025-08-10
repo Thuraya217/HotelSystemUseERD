@@ -2,7 +2,7 @@
 
 namespace HotelSystemUseERD.Repositories
 {
-    internal interface IRoomRepository
+    public interface IRoomRepository
     {
         void AddRoom(Room room);
         void DeleteRoom(string roomId);

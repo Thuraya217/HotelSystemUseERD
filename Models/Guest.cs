@@ -9,11 +9,13 @@ namespace HotelSystemUseERD.Models
 {
     public class Guest
     {
+        [Key]
+        public string GuestId { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         public string GuestName { get; set; }
-        public string GuestId { get; set; }
+        
         public string PhoneNumber { get; set; }
 
         // Navigation properties

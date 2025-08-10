@@ -8,7 +8,7 @@ using HotelSystemUseERD.Models;
 
 namespace HotelSystemUseERD.Repositories
 {
-    class RoomRepository : IRoomRepository
+    public class RoomRepository : IRoomRepository
     {
         private readonly HotelDbContext _context;
 
@@ -31,20 +31,24 @@ namespace HotelSystemUseERD.Repositories
 
         public void DeleteRoom(string roomId)
         {
-            var room = _context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+            var room = _context.Rooms.Find(roomId);
             if (room != null)
             {
                 _context.Rooms.Remove(room);
                 _context.SaveChanges();
             }
+            else
+            {
+                Console.WriteLine($"Room with ID {roomId} not found.");
+            }
         }
 
         public Room GetRoomById(string roomId)
         {
-            return _context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+            return _context.Rooms.Find(roomId);
         }
 
-        public List<Room> GetAllRooms()
+        public List <Room> GetAllRooms()
         {
             return _context.Rooms.ToList();
         }

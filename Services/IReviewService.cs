@@ -2,7 +2,7 @@
 
 namespace HotelSystemUseERD.Services
 {
-    internal interface IReviewService
+    public interface IReviewService
     {
         void AddReview(Review review);
         void DeleteReview(string reviewId);

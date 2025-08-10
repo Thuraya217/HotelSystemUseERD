@@ -8,7 +8,7 @@ using HotelSystemUseERD.Repositories;
 
 namespace HotelSystemUseERD.Services
 {
-    class RoomService
+    public class RoomService : IRoomService
     {
         private readonly IRoomRepository _roomRepository;
 
@@ -19,17 +19,10 @@ namespace HotelSystemUseERD.Services
 
         public void AddRoom(Room room)
         {
-            if (string.IsNullOrWhiteSpace(room.RoomId) || string.IsNullOrWhiteSpace(room.RoomType))
-            {
-                Console.WriteLine("Room ID and Room Type are required.");
-                return;
-            }
-
-            if (_roomRepository.GetRoomById(room.RoomId) != null)
-            {
-                Console.WriteLine("Room with the same ID already exists.");
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(room.RoomId))
+               Console.WriteLine("RoomId required");
+            if (GetRoomById(room.RoomId) != null)
+                Console.WriteLine("Room exists");
 
             _roomRepository.AddRoom(room);
         }
@@ -41,13 +34,6 @@ namespace HotelSystemUseERD.Services
 
         public void DeleteRoom(string roomId)
         {
-            var room = _roomRepository.GetRoomById(roomId);
-            if (room == null)
-            {
-                Console.WriteLine("Room not found.");
-                return;
-            }
-
             _roomRepository.DeleteRoom(roomId);
         }
 
@@ -56,18 +42,17 @@ namespace HotelSystemUseERD.Services
             return _roomRepository.GetRoomById(roomId);
         }
 
-        public List<Room> GetAllRooms()
+        public List <Room> GetAllRooms()
         {
             return _roomRepository.GetAllRooms();
         }
 
-        public List<Room> GetAvailableRooms()
+        public List <Room> GetAvailableRooms()
         {
             return _roomRepository.GetAllRooms()
                 .Where(r => r.IsAvailable)
                 .ToList();
         }
-
 
 
         public void SetAvailability(string roomId, bool isAvailable)

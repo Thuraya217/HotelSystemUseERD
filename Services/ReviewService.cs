@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelSystemUseERD.Services
 {
-    class ReviewService : IReviewService
+    public class ReviewService : IReviewService
     {
         private readonly IReviewRepository _reviewRepository;
 
@@ -38,19 +38,16 @@ namespace HotelSystemUseERD.Services
             return _reviewRepository.GetAllReviews();
         }
 
-        public List<Review> GetReviewsByRoomId(string roomId)
-        {
-            return _reviewRepository.GetAllReviews()
-                .Where(r => r.RoomId == roomId)
-                .ToList();
-        }
-
         public List<Review> GetReviewsByGuestId(string guestId)
         {
-            return _reviewRepository.GetAllReviews()
-                .Where(r => r.GuestId == guestId)
-                .ToList();
+            return _reviewRepository.GetReviewsByGuestId(guestId);
+        }
+
+        public List<Review> GetReviewsByRoomId(string roomId)
+        {
+            return _reviewRepository.GetReviewsByRoomId(roomId);
         }
     }
 }
+
 

@@ -25,11 +25,15 @@ namespace HotelSystemUseERD.Repositories
 
         public void DeleteBooking(string bookingId)
         {
-            var booking = _context.Bookings.FirstOrDefault(b => b.BookingId == bookingId);
+            var booking = _context.Bookings.Find(bookingId);
             if (booking != null)
             {
                 _context.Bookings.Remove(booking);
                 _context.SaveChanges();
+            }
+            else
+            {
+                 Console.WriteLine($"Booking with ID {bookingId} not found.");
             }
         }
 
@@ -39,7 +43,7 @@ namespace HotelSystemUseERD.Repositories
             _context.SaveChanges();
         }
 
-        public List<Booking> GetAllBookings()
+        public List <Booking> GetAllBookings()
         {
             return _context.Bookings.ToList();
         }

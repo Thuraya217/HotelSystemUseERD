@@ -39,7 +39,7 @@ namespace HotelSystemUseERD.Services
             return _guestRepository.GetGuestById(guestId);
         }
 
-        public List<Guest> GetAllGuests()
+        public List <Guest> GetAllGuests()
         {
             return _guestRepository.GetAllGuests();
         }
