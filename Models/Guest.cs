@@ -16,6 +16,7 @@ namespace HotelSystemUseERD.Models
         public string GuestId { get; set; }
         public string PhoneNumber { get; set; }
 
+        // Navigation properties
         public ICollection <Booking> Bookings { get; set; }
         public ICollection<Review> Reviews { get; set; }
 

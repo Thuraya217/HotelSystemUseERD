@@ -20,24 +20,6 @@ namespace HotelSystemUseERD.Services
         public void AddReview(Review review)
         {
 
-            if (string.IsNullOrWhiteSpace(review.Comment))
-            {
-                Console.WriteLine("Review comment cannot be empty.");
-                return;
-            }
-
-            var existingReviews = _reviewRepository.GetAllReviews();
-            bool alreadyReviewed = existingReviews.Any(r =>
-                r.GuestId == review.GuestId &&
-                r.RoomId == review.RoomId
-            );
-
-            if (alreadyReviewed)
-            {
-                Console.WriteLine("You have already reviewed this room.");
-                return;
-            }
-
             _reviewRepository.AddReview(review);
         }
 

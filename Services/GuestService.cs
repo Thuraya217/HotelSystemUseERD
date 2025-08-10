@@ -21,15 +21,6 @@ namespace HotelSystemUseERD.Services
         public void AddGuest(Guest guest)
         {
 
-            var existingGuests = _guestRepository.GetAllGuests();
-            bool phoneExists = existingGuests.Any(g => g.PhoneNumber == guest.PhoneNumber);
-
-            if (phoneExists)
-            {
-                Console.WriteLine("Phone number already exists for another guest.");
-                return;
-            }
-
             _guestRepository.AddGuest(guest);
         }
 

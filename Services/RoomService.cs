@@ -68,6 +68,8 @@ namespace HotelSystemUseERD.Services
                 .ToList();
         }
 
+
+
         public void SetAvailability(string roomId, bool isAvailable)
         {
             var room = _roomRepository.GetRoomById(roomId);

@@ -13,7 +13,7 @@ namespace HotelSystemUseERD
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=HotelSystem;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=HotelSystem;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         public DbSet<Room> Rooms { get; set; }

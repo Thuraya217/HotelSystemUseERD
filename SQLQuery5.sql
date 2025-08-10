@@ -1,0 +1,5 @@
+SELECT TOP (1000) [RoomId]
+      ,[RoomType]
+      ,[Price]
+      ,[IsAvailable]
+  FROM [HotelSystem].[dbo].[Rooms]

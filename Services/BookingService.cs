@@ -21,18 +21,6 @@ namespace HotelSystemUseERD.Services
         {
             var allBookings = _bookingRepository.GetAllBookings();
 
-            bool isConflict = allBookings.Any(b =>
-            b.RoomId == booking.RoomId &&
-            (
-                (booking.CheckInDate >= b.CheckInDate && booking.CheckInDate < b.CheckOutDate) ||
-                (booking.CheckOutDate > b.CheckInDate && booking.CheckOutDate <= b.CheckOutDate)
-            )
-          );
-
-            if (isConflict)
-            {
-                Console.WriteLine("Room is already booked in this time ");
-            }
             _bookingRepository.AddBooking(booking);
         }
 

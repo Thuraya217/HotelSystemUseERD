@@ -11,10 +11,11 @@ namespace HotelSystemUseERD.Models
     {
         [Key]
         public string ReviewId { get; set; }
-        public string RoomId { get; set; }
-        public string GuestId { get; set; }
+        public string RoomId { get; set; } // Foreign key to Room
+        public string GuestId { get; set; } // Foreign key to Guest
         public string Comment { get; set; }
 
+        // Navigation properties
         public Room room { get; set; }
         public Guest guest { get; set; }
 

@@ -14,9 +14,5 @@ namespace HotelSystemUseERD.Models
         public string RoomType { get; set; }
         public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
-
-        public ICollection <Booking> Bookings { get; set; } 
-        public ICollection<Review> Reviews { get; set; }
-
     }
 }

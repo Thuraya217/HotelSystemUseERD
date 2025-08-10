@@ -6,7 +6,7 @@ namespace HotelSystemUseERD.Repositories
     {
         void AddRoom(Room room);
         void DeleteRoom(string roomId);
-        List<Room> GetAllRooms();
+        List <Room> GetAllRooms();
         Room GetRoomById(string roomId);
         void UpdateRoom(Room room);
     }
