@@ -13,8 +13,11 @@ namespace HotelSystemUseERD.Models
         public string BookingId { get; set; }
         public string GuestId { get; set; } // Foreign key to Guest
         public string RoomId { get; set; } // Foreign key to Room
+        [Required]
         public DateTime CheckInDate { get; set; }
+        [Required]
         public DateTime CheckOutDate { get; set; }
+        [Required]
         public DateTime BookingDate { get; set; } = DateTime.Now;
 
         // Navigation properties
