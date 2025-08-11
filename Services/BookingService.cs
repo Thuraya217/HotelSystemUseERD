@@ -32,6 +32,11 @@ namespace HotelSystemUseERD.Services
             _bookingRepository.DeleteBooking(bookingId);
         }
 
+        public List<Booking> GetBookingsByGuestId(string guestId)
+        {
+            return _bookingRepository.GetAllBookings().Where(b => b.GuestId == guestId).ToList();
+        }
+
         public List<Booking> GetAllBookings()
         {
             return _bookingRepository.GetAllBookings();
