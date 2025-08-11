@@ -151,6 +151,7 @@ namespace HotelSystemUseERD
                         Console.WriteLine("1. Book Room");
                         Console.WriteLine("2. View My Bookings");
                         Console.WriteLine("3. Cancel Booking");
+                        Console.WriteLine("4. Add review");
                         Console.WriteLine("0. Back to Main Menu");
                         Console.Write("Choose option: ");
 
@@ -167,6 +168,11 @@ namespace HotelSystemUseERD
 
                             case "3":
                                 CancelBooking( guestId,  bookingService, roomService);
+                                break;
+
+                            case "4":
+                                AddReview(guest, roomService, bookingService);
+
                                 break;
 
                             case "0":
@@ -391,6 +397,43 @@ namespace HotelSystemUseERD
                     roomService.UpdateRoom(room);
                 }
                 Console.WriteLine($"Booking {bookingId} cancelled successfully!");
+            }
+
+            static void AddReview(Guest guest, IRoomService roomService, IBookingService bookingService)
+            {
+                Console.Clear();
+                Console.WriteLine("Add Review");
+                var bookings = bookingService.GetBookingsByGuestId(guest.GuestId);
+                if (bookings.Count == 0)
+                {
+                    Console.WriteLine("No bookings found to review.");
+                    return;
+                }
+                Console.WriteLine("Your Bookings:");
+                foreach (var booking in bookings)
+                {
+                    Console.WriteLine($"Booking ID: {booking.BookingId}, Room ID: {booking.RoomId}");
+                }
+                Console.Write("Enter Booking ID to review: ");
+                string bookingId = Console.ReadLine();
+                var bookingToReview = bookings.FirstOrDefault(b => b.BookingId == bookingId);
+                if (bookingToReview == null)
+                {
+                    Console.WriteLine($"Booking with ID {bookingId} not found.");
+                    return;
+                }
+                Console.Write("Enter your review: ");
+                string reviewText = Console.ReadLine();
+                var review = new Review
+                {
+                    ReviewId = Guid.NewGuid().ToString(),
+                    BookingId = bookingToReview.BookingId,
+                    GuestId = guest.GuestId,
+                    ReviewText = reviewText,
+                    ReviewDate = DateTime.Now
+                };
+                roomService.AddReview(review);
+                Console.WriteLine("Review added successfully!");
             }
         }
     }
