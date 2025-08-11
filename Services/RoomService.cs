@@ -19,11 +19,7 @@ namespace HotelSystemUseERD.Services
 
         public void AddRoom(Room room)
         {
-            if (string.IsNullOrWhiteSpace(room.RoomId))
-               Console.WriteLine("RoomId required");
-            if (GetRoomById(room.RoomId) != null)
-                Console.WriteLine("Room exists");
-
+            
             _roomRepository.AddRoom(room);
         }
 
@@ -53,7 +49,6 @@ namespace HotelSystemUseERD.Services
                 .Where(r => r.IsAvailable)
                 .ToList();
         }
-
 
         public void SetAvailability(string roomId, bool isAvailable)
         {
