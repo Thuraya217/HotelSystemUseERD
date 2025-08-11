@@ -12,7 +12,13 @@ namespace HotelSystemUseERD.Models
     {
         [Key]
         public string RoomId { get; set; }
+
+        [Required]
+        [RegularExpression("^(Single|Double)$")]
         public string RoomType { get; set; }
+
+        [Required]
+        [Range(0.01, double.MaxValue)]
         public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
 
