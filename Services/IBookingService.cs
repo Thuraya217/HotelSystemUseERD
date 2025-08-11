@@ -8,5 +8,7 @@ namespace HotelSystemUseERD.Services
         void DeleteBooking(string bookingId);
         List <Booking> GetAllBookings();
         void UpdateBooking(Booking booking);
+
+        List<Booking> GetBookingsByGuestId(string guestId); 
     }
 }
